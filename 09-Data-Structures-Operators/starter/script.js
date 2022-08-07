@@ -43,28 +43,128 @@ const restaurant = {
     console.log(otherIngredients);
   },
 };
+// STRINGS
+const airline = 'TAP Air Portugal';
+const plane = 'A320';
+
+console.log(plane.replaceAll('A', 'a'));
+
+// MAPS
+// const rest = new Map();
+// rest.set('name', 'Classico Italiano');
+// rest.set(1, 'Firenze, Italy');
+// rest.set(2, 'Lisbon, Portugal');
+
+// rest
+//   .set('categories', ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'])
+//   .set('open', 11)
+//   .set('close', 23)
+//   .set(true, 'We are open ')
+//   .set(false, 'We are closed ');
+
+// console.log(rest.get(true));
+
+// const time = 21;
+// console.log(rest.get(time > rest.get('open') && time < rest.get('close')));
+// console.log(rest.has('categories'));
+// rest.delete(2);
+// console.log(rest.size);
+// const arr = [1, 2];
+
+// rest.set(arr, 'test');
+// console.log(rest);
+// console.log(rest.get(arr));
+
+// rest.set(document.querySelector('h1'), 'Heading');
+// console.log(rest);
+
+// const question = new Map([
+//   ['question', 'What is the best programming language'],
+//   [1, 'C'],
+//   [2, 'Java'],
+//   [3, 'JavaScript'],
+//   ['correct', 3],
+//   [true, 'Correct🏆'],
+//   [false, 'Try again!😔'],
+// ]);
+// console.log(question);
+
+// // Convert object to Map
+// const hoursMap = new Map(Object.entries(openingHours));
+// console.log(hoursMap);
+
+// // Quizz app
+// console.log(question.get('question'));
+// for (const [key, value] of question) {
+//   if (typeof key === 'number') console.log(`Answer ${key}: ${value}`);
+// }
+
+// const answer = 2;
+// // const answer = Number(prompt('Your answer'));
+// console.log(answer);
+
+// console.log(question.get(answer === question.get('correct')));
+// console.log(
+//   answer === question.get('correct') ? question.get(true) : question.get(false)
+// );
+
+// // Convert map to array
+// console.log([...question]);
+// console.log([...question.keys()]);
+// console.log([...question.values()]);
+// console.log([...question.entries()]);
+
+// SETS
+// const ordersSet = new Set([
+//   'Pasta',
+//   'Risotto',
+//   'Pizza',
+//   'Pizza',
+//   'Pasta',
+//   'Risotto',
+//   'Pizza',
+// ]);
+
+// console.log(ordersSet);
+// console.log(new Set('Jonas'));
+// console.log(ordersSet.size);
+// console.log(ordersSet.has('Pizza'));
+// console.log(ordersSet.has('Bread'));
+// ordersSet.add('Garlic Bread');
+// ordersSet.add('Garlic Bread');
+// ordersSet.delete('Risotto');
+// // ordersSet.clear();
+// console.log(ordersSet);
+
+// for (const order of ordersSet) {
+//   console.log(order);
+// }
+
+// const staff = ['Waiter', 'Chef', 'Waiter', 'Manager', 'Chef', 'Waiter'];
+// const staffSet = [...new Set(staff)];
+// console.log(staffSet);
 
 // Loops
 // Property NAMES
-const properties = Object.keys(openingHours);
-console.log(properties);
+// const properties = Object.keys(openingHours);
+// console.log(properties);
 
-let openStr = `We are open on ${properties.length} days: `;
+// let openStr = `We are open on ${properties.length} days: `;
 
-for (const day of properties) {
-  openStr += `${day} ,`;
-}
-// Property VALUES
-const values = Object.values(openingHours);
-console.log(values);
+// for (const day of properties) {
+//   openStr += `${day} ,`;
+// }
+// // Property VALUES
+// const values = Object.values(openingHours);
+// console.log(values);
 
-// Entire object
-const entries = Object.entries(openingHours);
-// console.log(entries);
+// // Entire object
+// const entries = Object.entries(openingHours);
+// // console.log(entries);
 
-for (const [key, { open, close }] of entries) {
-  console.log(`On ${key} we open at ${open} and close at ${close}`);
-}
+// for (const [key, { open, close }] of entries) {
+//   console.log(`On ${key} we open at ${open} and close at ${close}`);
+// }
 
 // Optional chaining
 // console.log(restaurant.openingHours?.mon?.open);
@@ -149,12 +249,12 @@ for (const [key, { open, close }] of entries) {
 
 // restaurant.orderPizza && restaurant.orderPizza('mushroom', 'spinach');
 
-restaurant.numGuests = 0;
-const guests1 = restaurant.numGuests || 10;
+// restaurant.numGuests = 0;
+// const guests1 = restaurant.numGuests || 10;
 
-// Nullish values: null and undefined (NOT 0 or '')
-const guestsCorrect = restaurant.numGuests ?? 10;
-console.log(guestsCorrect);
+// // Nullish values: null and undefined (NOT 0 or '')
+// const guestsCorrect = restaurant.numGuests ?? 10;
+// console.log(guestsCorrect);
 
 // The rest operator 👇
 
