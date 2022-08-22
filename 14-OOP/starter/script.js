@@ -139,6 +139,51 @@ account.latest = 50;
 console.log(account.movements);
 
 
+// const PersonProto = {
+//   calcAge() {
+//     console.log(2038 - this.birthYear);
+//   },
+
+//   init(firstName, birthYear) {
+//     this.firstName = firstName;
+//     this.birthYear = birthYear;
+//   }
+// }
+
+// const steven = Object.create(PersonProto);
+// console.log(steven);
+// steven.name = 'Steven';
+// steven.birthYear = 2002;
+// steven.calcAge();
+
+
+// const sarah = Object.create(PersonProto);
+// sarah.init('Sarah', 1979);
+// sarah.calcAge();
+
+// const Student = function(firstName, birthYear, course) {
+//   Person.call(this, firstName, birthYear)
+//   this.course = course;
+// }
+
+// Student.prototype = Object.create(Person.prototype);
+
+// Student.prototype.introduce = function() {
+//   console.log(`My name is ${this.firstName} and I study ${this.course}`);
+// }
+
+// const mike = new Student('Mike', 2020, 'Computer Science');
+// console.log(mike);
+// mike.introduce();
+
+
+class StudentCL extends PersonCL {
+  constructor(fullName, birthYear, course) {
+    super(fullName, birthYear);
+    this.course = course;
+  }
+}
+
 const PersonProto = {
   calcAge() {
     console.log(2038 - this.birthYear);
@@ -150,17 +195,18 @@ const PersonProto = {
   }
 }
 
-const steven = Object.create(PersonProto);
-console.log(steven);
-steven.name = 'Steven';
-steven.birthYear = 2002;
-steven.calcAge();
-
-
-const sarah = Object.create(PersonProto);
-sarah.init('Sarah', 1979);
-sarah.calcAge();
-
+const StudentProto = Object.create(PersonProto);
+StudentProto.init = function(firstName, birthYear, course) {
+  PersonProto.init.call(this, firstName, birthYear);
+  this.course = course;
+}
+StudentProto.introcude = function() {
+    console.log(`My name is ${this.firstName} and I study ${this.course}`);
+  }
+const jay = Object.create(StudentProto);
+jay.init('Jay', 2010, 'Computer Science')
+jay.introcude()
+jay.calcAge();
 
 //////////////////////////////////////
 // Challenge #2
@@ -176,6 +222,7 @@ DATA CAR 1: 'Ford' going at 120 km/h
 GOOD LUCK 😀
 */
 
+/*
 class Car {
   constructor(make, speed) {
     this.make = make;
@@ -210,3 +257,132 @@ ford.brake();
 console.log(ford.speedUS);
 ford.speedUS = 65;
 console.log(ford.speed);
+*/
+
+
+
+// Coding Challenge #3
+
+/* 
+1. Use a constructor function to implement an Electric Car (called EV) as a CHILD "class" of Car. Besides a make and current speed, the EV also has the current battery charge in % ('charge' property);
+2. Implement a 'chargeBattery' method which takes an argument 'chargeTo' and sets the battery charge to 'chargeTo';
+3. Implement an 'accelerate' method that will increase the car's speed by 20, and decrease the charge by 1%. Then log a message like this: 'Tesla going at 140 km/h, with a charge of 22%';
+4. Create an electric car object and experiment with calling 'accelerate', 'brake' and 'chargeBattery' (charge to 90%). Notice what happens when you 'accelerate'! HINT: Review the definiton of polymorphism 😉
+
+DATA CAR 1: 'Tesla' going at 120 km/h, with a charge of 23%
+
+GOOD LUCK 😀
+*/
+
+// const Car = function(make, speed) { 
+//   this.make = make;
+//   this.speed = speed;
+// }
+// Car.prototype.accelerate = function() {
+//   this.speed += 10;
+//   console.log(this.speed);
+// }
+// Car.prototype.brake = function() {
+//   this.speed -= 5;
+//   console.log(this.speed);
+// }
+
+// const EV = function(make, speed, charge) {
+//   Car.call(this, make, speed);
+//   this.charge = charge;
+// }
+
+// EV.prototype = Object.create(Car.prototype);
+// EV.prototype.chargeBattery = function(chargetTo) {
+//   this.charge = chargetTo;
+// }
+
+// EV.prototype.accelerate = function( ) {
+//   this.speed += 20;
+//   this.charge -= 1;
+//   console.log(`${this.make} going at ${this.speed}, with a charge of ${this.charge}`);
+// }
+
+// const tesla = new EV('tesla', 120, 23);
+// tesla.charge = 90;
+// tesla.accelerate()
+// tesla.brake()
+// tesla.accelerate();
+
+
+// 1.Public fields
+// 2,Priate fields
+// 3.Public methods
+// 4.Private methods
+// Static version
+
+
+class Account {
+  // 1.Public fields (instances)
+  local = navigator.language;
+  // _movements = [];
+  
+  // 2.Private fields
+  #movements = [];
+  #pin;
+
+  constructor(owner, currency, pin) {
+    this.owner = owner;
+    this.currency = currency;
+    // protected property
+    this.#pin = pin;
+    // this._movements = [];
+    // this.locale = navigator.language;
+
+    console.log(`Thanks for opening an account ${this.owner}`);
+  }
+
+  getMovement() {
+    return this.#movements;
+  }
+
+  deposit(val) {
+    this.#movements.push(val) 
+    return this;
+  }
+
+  withdraw(val) {
+    this.deposit(-val)
+    return this
+  }
+
+  // PrivateLoan
+  // #approveLoad(val) {
+  //   return true;
+  // }
+  _approveLoan(val) {
+    return true;
+  }
+
+  requestLoan(val) {
+    if (this._approveLoan(val)) {
+      this.deposit(val);
+      console.log('Loan approved');
+    }
+    return this;
+  }
+
+  static helper() {
+    console.log('Helper');
+  }
+}
+
+const acct1 = new Account('Jonas', 'EUR', 1111);
+acct1.deposit(240)
+acct1.withdraw(100)
+acct1.requestLoan(100);
+console.log(acct1.getMovement());
+console.log(acct1);
+Account.helper();
+// console.log(acct1.#pin);
+// console.log(acct1.#approveLoan);
+
+
+// Chaining
+acct1.deposit(300).deposit(500).withdraw(-45).requestLoan(2550).withdraw(4000);
+console.log(acct1.getMovement());
