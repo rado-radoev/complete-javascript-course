@@ -184,7 +184,33 @@ btn.addEventListener('click', function() {
   getCountryData('portugal')
 })
 
-console.log('Test start');
-setTimeout(() => console.log('0 sec timer'), 0);
-Promise.resolve('Resolved promise 1').then(res => console.log(res));
-console.log('Test end');
+// console.log('Test start');
+// setTimeout(() => console.log('0 sec timer'), 0);
+// Promise.resolve('Resolved promise 1').then(res => console.log(res));
+// console.log('Test end');
+
+
+const lotteryPromise = new Promise(function(resolve, reject) {
+  console.log('Lotter draw is happening')
+  setTimeout(function() {
+    if (Math.random() >= .5) {
+      resolve('You win')
+    }
+    else {
+      reject(new Error('You Lost'))
+    }
+  }, 2000 )
+})
+
+lotteryPromise.then(res => console.log(res)).catch(err => console.error(err))
+
+const wait = function(seconds) {
+  return  new Promise(function(resolve) {
+    setTimeout(resolve, seconds * 1000);
+  })
+}
+
+wait(2).then(() => {
+  console.log('I waited for 2 seconds')
+  return wait(1);
+}).then(() => console.log('I waited for 1 second'))
